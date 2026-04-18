@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>View File</title>
+</head>
+<body>
+  <h2 id="name"></h2>
+  <pre id="code"></pre>
+
+<script>
+const id = location.pathname.split("/")[2];
+
+fetch(`/.netlify/functions/get?id=${id}`)
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("name").innerText = data.filename;
+    document.getElementById("code").innerText = data.content;
+  });
+</script>
+</body>
+</html>
