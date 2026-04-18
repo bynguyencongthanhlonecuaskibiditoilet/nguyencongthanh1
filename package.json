@@ -1,0 +1,2 @@
+/raw/:id/:name   /.netlify/functions/get?id=:id   200
+/view/:id        /view.html                       200
