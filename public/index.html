@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Raw PRO</title>
+</head>
+<body>
+  <h2>Tạo file</h2>
+
+  <input id="filename" placeholder="tenfile.js"><br><br>
+  <textarea id="content" rows="10" cols="40"></textarea><br><br>
+
+  <button onclick="upload()">Upload</button>
+
+  <p id="result"></p>
+
+<script>
+async function upload() {
+  const content = document.getElementById("content").value;
+  const filename = document.getElementById("filename").value;
+
+  const res = await fetch('/.netlify/functions/create', {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ content, filename })
+  });
+
+  const data = await res.json();
+
+  document.getElementById("result").innerHTML =
+    `Raw: <a href="${data.raw}" target="_blank">${data.raw}</a><br>
+     View: <a href="${data.view}" target="_blank">${data.view}</a>`;
+}
+</script>
+</body>
+</html>
